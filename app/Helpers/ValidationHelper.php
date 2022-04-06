@@ -4,7 +4,6 @@ namespace App\Helpers;
 
 class ValidationHelper
 {
-
     /**
      * @param array $errors
      * @return array
@@ -12,10 +11,10 @@ class ValidationHelper
     public static function formatErrors(array $errors): array {
         $response = [];
 
-        foreach ($errors as $key => $error) {
+        foreach ($errors as $key => $value) {
             $response[] = [
                 'field' => $key,
-                'message' => $error[0]
+                'message' => $value[0]
             ];
         }
 

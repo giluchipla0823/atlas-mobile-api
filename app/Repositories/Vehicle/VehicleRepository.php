@@ -2,11 +2,13 @@
 
 namespace App\Repositories\Vehicle;
 
+use App\Helpers\QueryParamsHelper;
 use App\Models\State;
 use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Collection;
+use Yajra\DataTables\Facades\DataTables;
 
 class VehicleRepository implements VehicleRepositoryInterface
 {
@@ -26,10 +28,22 @@ class VehicleRepository implements VehicleRepositoryInterface
      */
     public function all(Request $request)
     {
-        return $this->vehicle->whereBetween('state_id', [State::STATE_ID_ON_TERMINAL, 4])
-            ->where('vin', 'LIKE', "%". $request->vin ."%")
-            ->orderByDesc('dt_onterminal')
-            ->paginate(20);
+
+        $query = $this->vehicle->query();
+
+        $query->whereBetween('state_id', [State::STATE_ID_ON_TERMINAL, 4]);
+
+        $query->with(QueryParamsHelper::getIncludesParamFromRequest());
+
+        if ($request->has('vin')) {
+            $query = $query->where('vin', 'LIKE', "%". $request->vin ."%");
+        }
+
+        if (QueryParamsHelper::checkIncludeParamDatatables()) {
+            return Datatables::customizable($query)->response();
+        }
+
+        return $query->orderByDesc('dt_onterminal')->paginate(20);
     }
 
     public function find(int $id): Model

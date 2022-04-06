@@ -39,6 +39,17 @@ class VehicleController extends Controller
     }
 
     /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function findAll(Request $request): JsonResponse
+    {
+        $vehicles = $this->vehicleService->findAll($request);
+
+        return response()->json($vehicles);
+    }
+
+    /**
      * Registrar vehículo.
      *
      * @param VehicleStoreRequest $request
