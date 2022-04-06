@@ -12,10 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $connection = 'auth';
+
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $fillable = [
         'name',
@@ -24,9 +26,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * The attributes that should be hidden for arrays.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -34,11 +36,26 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast.
+     * The attributes that should be cast to native types.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function login($compoundId){
+        $this->online = 1;
+        $this->parent_compound = $compoundId;
+        $this->save();
+    }
+
+    public function logout(){
+        $this->tokens()->delete();
+        $this->auth_token = NULL;
+        $this->online = 0;
+        $this->parent_compound = 0;
+        $this->device_id = NULL;
+        $this->save();
+    }
 }
