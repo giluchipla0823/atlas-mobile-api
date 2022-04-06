@@ -21,10 +21,10 @@ return [
     ],
 
     'domains' => [
-        'pro' => 'api.wepark.pro',
+        'pro' => '',
         'pre' => '',
         'qa' => '',
-        'test' => 'api.glcp-demos.es', // URL test que pertenece a LUIGGI
+        'test' => 'atlas-mobile-api.glcp-demos.es', // URL test que pertenece a LUIGGI
         'local' => 'localhost',
     ],
 
