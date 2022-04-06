@@ -3,10 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\QueryException;
 use Throwable;
 use Illuminate\Http\Request;
 use App\Helpers\ValidationHelper;
-use Doctrine\DBAL\Query\QueryException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;

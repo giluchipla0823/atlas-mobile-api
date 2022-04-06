@@ -12,7 +12,7 @@ class EloquentDataTable extends YajraEloquentDataTable
      */
     public function response(bool $transform = false): array
     {
-        try {
+        // try {
             $this->prepareQuery();
 
             $results = $this->results();
@@ -20,9 +20,11 @@ class EloquentDataTable extends YajraEloquentDataTable
             $processed = $this->processingResults($results, $transform);
 
             return $this->render($processed);
-        } catch (\Exception $exception) {
-            return $this->errorResponse($exception);
-        }
+        // } catch (\Exception $exception) {
+        //    dd($exception);
+            // dd($exception);
+            // return $this->errorResponse($exception);
+        // }
     }
 
     /**
