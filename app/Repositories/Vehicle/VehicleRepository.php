@@ -53,7 +53,9 @@ class VehicleRepository implements VehicleRepositoryInterface
             $query = $query->where('vin', 'LIKE', "%". $request->vin ."%");
         }
 
-        $query = $query->with('design');
+        $query = $query->with(['design' => function($q) {
+            $q->selectRaw('id, name, short_name, length, brand_id, code');
+        }]);
 
 
         $query = $query->orderByDesc('dt_onterminal');
