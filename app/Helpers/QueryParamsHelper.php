@@ -4,11 +4,9 @@ namespace App\Helpers;
 
 class QueryParamsHelper
 {
-    /**
-     * @return array
-     */
+
     public static function getIncludesParamFromRequest(): array {
-        $includes = request()->query->get('includes') || request()->request->get('includes');
+        $includes = request()->query->get('includes');
 
         if(!$includes){
             return [];
