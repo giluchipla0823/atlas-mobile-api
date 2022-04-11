@@ -39,11 +39,23 @@ class VehicleRepository implements VehicleRepositoryInterface
             $query = $query->where('vin', 'LIKE', "%". $request->vin ."%");
         }
 
-        if (QueryParamsHelper::checkIncludeParamDatatables()) {
-            return Datatables::customizable($query)->response();
+        return $query->orderByDesc('dt_onterminal')->paginate(20);
+    }
+
+    public function datatables(Request $request) {
+        $query = $this->vehicle->query();
+
+        $query->whereBetween('state_id', [State::STATE_ID_ON_TERMINAL, 4]);
+
+        $query->with(QueryParamsHelper::getIncludesParamFromRequest());
+
+        if ($request->has('vin')) {
+            $query = $query->where('vin', 'LIKE', "%". $request->vin ."%");
         }
 
-        return $query->orderByDesc('dt_onterminal')->paginate(20);
+        $query = $query->orderByDesc('dt_onterminal');
+
+        return Datatables::customizable($query)->response();
     }
 
     public function find(int $id): Model

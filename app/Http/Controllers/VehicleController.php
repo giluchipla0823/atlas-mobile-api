@@ -44,7 +44,7 @@ class VehicleController extends Controller
      */
     public function datatables(Request $request): JsonResponse
     {
-        $vehicles = $this->vehicleService->findAll($request);
+        $vehicles = $this->vehicleService->datatables($request);
 
         return response()->json($vehicles);
     }

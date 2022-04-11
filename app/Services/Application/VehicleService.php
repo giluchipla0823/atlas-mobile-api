@@ -31,6 +31,15 @@ class VehicleService
     }
 
     /**
+     * @param Request $request
+     * @return Collection|LengthAwarePaginator
+     */
+    public function datatables(Request $request)
+    {
+        return $this->repository->datatables($request);
+    }
+
+    /**
      * Registrar vehículo.
      *
      * @param array $params
