@@ -40,6 +40,7 @@ Route::post('/pairs',[HydrateController::class,'listPairs'])->name('pairs'); //D
 // Route::post('/devicetypes',[HydrateController::class,'deviceTypes'])->name('devicetypes'); //Devuelve los tipos de dispositivo en esta instancia de WPark
 Route::get('/device-types', [DeviceTypeController::class, 'index'])->name('device-types.index'); // Devuelve los tipos de dispositivo en esta instancia de WPark
 
+Route::post('/vehicles/datatables', [VehicleController::class, 'findAll'])->name('vehicles.datatables');
 Route::get('/vehicles/find-all', [VehicleController::class, 'findAll'])->name('vehicles.find-all');
 
 // RUTAS PROTEGIDAS POR TOKEN DE ACCESO
