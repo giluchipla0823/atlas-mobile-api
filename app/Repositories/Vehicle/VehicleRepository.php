@@ -53,6 +53,9 @@ class VehicleRepository implements VehicleRepositoryInterface
             $query = $query->where('vin', 'LIKE', "%". $request->vin ."%");
         }
 
+        $query = $query->with('design');
+
+
         $query = $query->orderByDesc('dt_onterminal');
 
         return Datatables::customizable($query)->response();
