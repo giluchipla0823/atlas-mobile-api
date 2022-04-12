@@ -21,9 +21,6 @@ use App\Http\Controllers\DamageController;
 //MIDDLEWARE QUE SE DEBE AÑADIR A TODAS LAS RUTAS EXCEPTO LOGIN Y REGISTRO DE DISPOSITIVO (SOLO PERMITE LLAMADAS AUTENTICADAS)
 // middleware('auth:sanctum')->
 
-Route::get('/', function() {
-   return 'hello api';
-});
 
 //AUTH
 Route::post('/login',[AuthController::class,'login'])->name('login'); //Realiza el acceso autenticado al sistema
