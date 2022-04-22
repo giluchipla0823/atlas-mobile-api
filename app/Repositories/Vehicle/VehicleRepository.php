@@ -47,18 +47,20 @@ class VehicleRepository implements VehicleRepositoryInterface
 
         $query->whereBetween('state_id', [State::STATE_ID_ON_TERMINAL, 4]);
 
-        $query->with(QueryParamsHelper::getIncludesParamFromRequest());
+        // $query->with(QueryParamsHelper::getIncludesParamFromRequest());
 
         if ($request->has('vin')) {
             $query = $query->where('vin', 'LIKE', "%". $request->vin ."%");
         }
 
+        /*
         $query = $query->with(['design' => function($q) {
             $q->selectRaw('id, name, short_name, length, brand_id, code');
         }]);
 
 
-        $query = $query->orderByDesc('dt_onterminal');
+        $query = $query->orderByDesc('dt_onterminal')
+        */
 
         return Datatables::customizable($query)->response();
     }

@@ -139,6 +139,8 @@ class Position extends Model
         // Obtener las slots de la fila.
         $slots = $this->children()->get();
 
+        // dd($slots);
+
         if (count($slots) === 0) {
             throw new Exception("La fila seleccionada no tiene slots asignados.", Response::HTTP_BAD_REQUEST);
         }

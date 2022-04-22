@@ -104,6 +104,8 @@ class RulesController extends Controller
             // Obtener la primera regla configurada.
             $selectedRule = $allRules->first();
 
+            // dd($selectedRule);
+
             // Si no hay regla -> YARD
             if (!$selectedRule) {
                 $defaultOverflowPosition = CompoundConfig::where('compound_id', $vehicle->parent_compound)
@@ -153,6 +155,8 @@ class RulesController extends Controller
                 })
                 ->first();
 
+            // dd($opened);
+
             if ($opened) {
                 // $destination = $opened;
 
@@ -192,6 +196,8 @@ class RulesController extends Controller
                     $destination->direct = true;
                 }
             }
+
+            dd($destination);
 
             $destination->ruleId = $selectedRule->id;
             $destination->nextState = $selectedRule->next_state;
